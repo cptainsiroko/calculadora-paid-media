@@ -108,6 +108,26 @@
       pointer-events: none;
     }
 
+    .btn-limpiar {
+      width: 100%;
+      margin-top: 18px;
+      padding: 11px 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-limpiar:hover { background: rgba(47, 91, 234, 0.06); }
+
+    .btn-limpiar:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(47, 91, 234, 0.25);
+    }
+
     .result {
       display: flex;
       justify-content: space-between;
@@ -237,6 +257,8 @@
             <span class="unit">x</span>
           </div>
         </div>
+
+        <button type="button" id="limpiar" class="btn-limpiar">Limpiar</button>
       </section>
 
       <section class="card" aria-live="polite">
@@ -378,7 +400,17 @@
       }
     }
 
+    function limpiar() {
+      ids.forEach(id => {
+        el[id].value = id === "iva" ? "21" : "";
+        el[id].classList.remove("invalid");
+      });
+      calcular();
+      el.precio.focus();
+    }
+
     ids.forEach(id => el[id].addEventListener("input", calcular));
+    $("limpiar").addEventListener("click", limpiar);
     calcular();
   </script>
 </body>
